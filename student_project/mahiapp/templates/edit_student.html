@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Student — StudentHub{% endblock %}
+{% block nav_dashboard %}class="active"{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="form-container">
+        <div class="form-header">
+            <div class="form-icon">✏️</div>
+            <h2>Edit Student</h2>
+            <p>Update the student's information below</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-error" role="alert">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="/edit/{{ student.0 }}/" id="edit-form" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="edit-name">Full Name</label>
+                <input type="text" id="edit-name" name="name" value="{{ student.1 }}" placeholder="Enter full name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-email">Email Address</label>
+                <input type="email" id="edit-email" name="email" value="{{ student.2 }}" placeholder="you@example.com"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-password">New Password</label>
+                <input type="password" id="edit-password" name="password" placeholder="Leave blank to keep current">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="save-btn">
+                💾 Save Changes
+            </button>
+            <a href="/dashboard/" class="btn btn-secondary" id="cancel-btn">
+                ← Cancel
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
